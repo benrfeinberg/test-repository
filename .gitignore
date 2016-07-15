@@ -234,3 +234,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+.settings/org.eclipse.core.resources.prefs
+bin-debug/
