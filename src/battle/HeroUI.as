@@ -1,6 +1,6 @@
 package battle
 {
-	import characters.Hero;
+	import models.Hero;
 	
 	import supportRPG.assets.battle.heroUI_mc;
 
@@ -17,10 +17,12 @@ package battle
 		public function HeroUI(assets:heroUI_mc, hero:Hero)
 		{
 			_assets = assets;
+			_model = hero;
 			_assets.name_txt.text = hero.name;
-			_hpBar = new Bar(_assets.hp);
-			_timeBar = new Bar(_assets.time);
-			_happinessBar = new Bar(_assets.happiness);
+			_hpBar = new Bar(_assets.hp, hero.maxHp);
+			_happinessBar = new Bar(_assets.happiness, hero.maxHappiness);
+			_timeBar = new Bar(_assets.time, hero.maxTime);
+			_timeBar.value = 0;
 		}
 	}
 }

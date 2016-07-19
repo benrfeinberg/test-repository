@@ -1,5 +1,7 @@
 package battle
 {
+	import models.Supporter;
+	
 	import supportRPG.assets.battle.skillBar_mc;
 
 	public class SkillBar
@@ -9,10 +11,14 @@ package battle
 		private var _mpBar:Bar;
 		private var _skills:Vector.<SkillButton>;
 		
-		public function SkillBar(assets:skillBar_mc)
+		private var _model:Supporter;
+		
+		public function SkillBar(assets:skillBar_mc, supporter:Supporter)
 		{
 			_assets = assets;
-			_mpBar = new Bar(_assets.mpBar);
+			_model = supporter;
+			
+			_mpBar = new Bar(_assets.mpBar, _model.maxMp);
 			_skills = Vector.<SkillButton>([
 				new SkillButton(_assets.skill1),
 				new SkillButton(_assets.skill2),
