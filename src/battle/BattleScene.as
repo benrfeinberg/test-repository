@@ -3,6 +3,7 @@ package battle
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import models.Enemy;
 	import models.Hero;
 	import models.Supporter;
 	
@@ -15,13 +16,16 @@ package battle
 		
 		private var _supporterUI:SkillBar;
 		private var _heroUIs:Vector.<HeroUI>;
+		private var _enemyUIs:Vector.<EnemyUI>;
 		
 		private var _supporterModel:Supporter;
 		private var _heroModels:Vector.<Hero>;
+		private var _enemyModels:Vector.<Enemy>;
 		
 		public function BattleScene()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, _resize, false, 0, true);
+			addEventListener(Event.ENTER_FRAME, _updateScene, false, 0, true);
 			addChild(_assets);
 			
 			_supporterModel = new Supporter(25);
@@ -30,13 +34,24 @@ package battle
 				new Hero("Blue", 14),
 				new Hero("Green", 7)
 			]);
+			_enemyModels = Vector.<Enemy>([
+				new Enemy("Sea Monster", 50)
+			]);
 			
 			_supporterUI = new SkillBar(_assets.skillBar, _supporterModel);
 			_heroUIs = Vector.<HeroUI>([
-				new HeroUI(_assets.heroUI1, _heroModels[0]),
-				new HeroUI(_assets.heroUI2, _heroModels[1]),
-				new HeroUI(_assets.heroUI3, _heroModels[2])
+				new HeroUI(_assets.heroUI1, _assets.char1, _heroModels[0]),
+				new HeroUI(_assets.heroUI2, _assets.char2, _heroModels[1]),
+				new HeroUI(_assets.heroUI3, _assets.char3, _heroModels[2])
 			]);
+			_enemyUIs = Vector.<EnemyUI>([
+				new EnemyUI(_assets.monster, _enemyModels[0])
+			]);
+		}
+		
+		private function _updateScene(event:Event):void
+		{
+			
 		}
 		
 		private function _resize(event:Event = null):void {

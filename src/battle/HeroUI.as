@@ -1,5 +1,7 @@
 package battle
 {
+	import flash.display.MovieClip;
+	
 	import models.Hero;
 	
 	import supportRPG.assets.battle.heroUI_mc;
@@ -7,6 +9,7 @@ package battle
 	public class HeroUI
 	{
 		private var _assets:heroUI_mc;
+		private var _characterAssets:MovieClip;
 		
 		private var _hpBar:Bar;
 		private var _timeBar:Bar;
@@ -14,9 +17,10 @@ package battle
 		
 		private var _model:Hero;
 		
-		public function HeroUI(assets:heroUI_mc, hero:Hero)
+		public function HeroUI(assets:heroUI_mc, characterAssets: MovieClip, hero:Hero)
 		{
 			_assets = assets;
+			_characterAssets = characterAssets;
 			_model = hero;
 			_assets.name_txt.text = hero.name;
 			_hpBar = new Bar(_assets.hp, hero.maxHp);
