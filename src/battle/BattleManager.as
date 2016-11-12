@@ -29,5 +29,9 @@ package battle
 		private function _battleLost():void {
 			
 		}
+		
+		private function _update():void {
+			
+		}
 	}
 }

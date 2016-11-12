@@ -7,6 +7,12 @@ package models
 		private var _name:String;
 		private var _maxHp:int;
 		private var _hp:int;
+		private var _strength:int;
+		private var _defence:int;
+		private var _magic:int;
+		private var _speed:int;
+		private var _moveList:Vector.<Move>;
+		private var _movePriorityModifiers:Vector.<MovePriorityModifier>;
 		
 		public function Creature(name:String, maxHp:int)
 		{

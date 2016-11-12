@@ -28,14 +28,14 @@ package battle
 			addEventListener(Event.ENTER_FRAME, _updateScene, false, 0, true);
 			addChild(_assets);
 			
-			_supporterModel = new Supporter(25);
+			_supporterModel = new Supporter(25, null);
 			_heroModels = Vector.<Hero>([
 				new Hero("Red", 10),
 				new Hero("Blue", 14),
 				new Hero("Green", 7)
 			]);
 			_enemyModels = Vector.<Enemy>([
-				new Enemy("Sea Monster", 50)
+				new Enemy("Sea Monster", 50, 1, 1, null)
 			]);
 			
 			_supporterUI = new SkillBar(_assets.skillBar, _supporterModel);
