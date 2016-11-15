@@ -13,6 +13,12 @@ package battle
 		{
 			_heroes = heroes;
 			_enemies = enemies;
+			
+			resetEnemyGroup();
+		}
+		
+		public function resetEnemyGroup():void {
+			_currentGroup = 0;
 		}
 		
 		public function getHeroes():Vector.<Hero> {
