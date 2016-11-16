@@ -48,15 +48,5 @@ package battle
 				new EnemyUI(_assets.monster, _enemyModels[0])
 			]);
 		}
-		
-		private function _updateScene(event:Event):void
-		{
-			
-		}
-		
-		private function _resize(event:Event = null):void {
-			_assets.width = stage.stageWidth;
-			_assets.scaleY = _assets.scaleX;
-		}
 	}
 }
