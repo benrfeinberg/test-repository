@@ -10,7 +10,9 @@ package data
 					{name:"Green", hp:7}
 				],
 				enemies: [
-						
+					[
+						{name:"Sea Monster", maxHp:50, gold:1, fame:1, drops:null}
+					]
 				]
 			}
 		}

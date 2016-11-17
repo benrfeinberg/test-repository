@@ -3,8 +3,9 @@ package
 	import flash.display.Sprite;
 	
 	import battle.BattleManager;
-	import models.BattleScenario;
 	
+	import models.BattleScenario;
+	import models.ModelFactory;
 	import models.Supporter;
 	
 	import view.IMainView;
@@ -20,7 +21,7 @@ package
 		public function SupportRPG()
 		{
 			_supporter = new Supporter();
-			_battleScenario = new BattleScenario();
+			_battleScenario = ModelFactory.generateBattleScenarioByLevel(1);
 			_battleManager = new BattleManager();
 			_mainView = new VectorMainView();
 			addChild(_mainView);
