@@ -1,7 +1,5 @@
-package battle
+package models
 {
-	import models.Enemy;
-	import models.Hero;
 
 	public class BattleScenario
 	{

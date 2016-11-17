@@ -1,6 +1,7 @@
 package battle
 {
 	import models.Supporter;
+	import models.BattleScenario;
 
 	public class BattleManager
 	{

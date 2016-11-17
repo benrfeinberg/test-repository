@@ -3,8 +3,7 @@ package
 	import flash.display.Sprite;
 	
 	import battle.BattleManager;
-	import battle.BattleScenario;
-	import battle.BattleScene;
+	import models.BattleScenario;
 	
 	import models.Supporter;
 	
