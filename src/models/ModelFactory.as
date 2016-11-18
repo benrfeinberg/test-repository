@@ -41,13 +41,44 @@ package models
 		public static function generateEnemy(data:Object):Enemy {
 			var gold:int = data['gold'] || 0;
 			var fame:int = data['fame'] || 0;
-			var drops:Vector.<IItem> = new Vector.<IItem>();
+			
+			var dropsData:Array = data['drops'] as Array;
+			var drops:Vector.<IItem> = null;
+			
+			if(dropsData && dropsData.length) {
+				drops = new Vector.<IItem>();
+				for(var itemData:Object in dropsData) {
+					drops.push(generateItem(itemData));
+				}
+			}
 			
 			return new Enemy(data['name'], data['maxHp'], gold, fame, drops);
 		}
 		
 		public static function generateHero(data:Object):Hero {
 			return new Hero(data['name'], data['maxHp']);
+		}
+		
+		public static function generateItem(data:Object):IItem {
+			return null;
+		}
+		
+		public static function generateSupporter(data:Object):Supporter {
+			var movesData:Array = data['moves'] as Array;
+			var moves:Vector.<Move> = null;
+			
+			if(movesData && movesData.length) {
+				moves = new Vector.<Move>();
+				for(var moveData:Object in movesData) {
+					moves.push(generateMove(moveData));
+				}
+			}
+			
+			return new Supporter(data['maxMp'], moves);		
+		}
+		
+		public static function generateMove(data:Object):Move {
+			return MoveFactory.getMove(data['id'], data['level']);
 		}
 	}
 }

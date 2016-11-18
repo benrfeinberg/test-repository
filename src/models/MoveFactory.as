@@ -1,6 +1,5 @@
-package battle.move.logic
+package models
 {
-	import models.Move;
 
 	public class MoveFactory
 	{	

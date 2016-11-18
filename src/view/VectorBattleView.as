@@ -3,7 +3,6 @@ package view
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import battle.BattleScene;
 	import battle.EnemyUI;
 	import battle.HeroUI;
 	
@@ -13,14 +12,14 @@ package view
 	
 	import supportRPG.assets.battle.Battle_mc;
 
-	public class VectorMainView extends Sprite implements IMainView
+	public class VectorBattleView extends Sprite implements IBattleView
 	{
 		private var _assets:Battle_mc;
 		private var _heroes:Vector.<Sprite>;
 		private var _enemies:Vector.<Sprite>;
 		private var _supporter:Sprite;
 		
-		public function VectorMainView()
+		public function VectorBattleView()
 		{
 			_assets = new Battle_mc();
 			addChild(_assets);

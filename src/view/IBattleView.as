@@ -4,7 +4,7 @@ package view
 	import models.Hero;
 	import models.Supporter;
 
-	public interface IMainView
+	public interface IBattleView
 	{
 		function addEnemy(enemy:Enemy):void;
 		function removeEnemy(enemy:Enemy):void;

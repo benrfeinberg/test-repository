@@ -1,17 +1,21 @@
 package battle
 {
-	import models.Supporter;
 	import models.BattleScenario;
+	import models.Supporter;
+	
+	import view.IBattleView;
 
 	public class BattleManager
 	{
 		private var _supporter:Supporter;
 		private var _battleScenario:BattleScenario;
+		private var _battleView:IBattleView;
 		
-		public function BattleManager(supporter:Supporter, battleScenario:BattleScenario)
+		public function BattleManager(supporter:Supporter, battleScenario:BattleScenario, battleView:IBattleView)
 		{
 			_supporter = supporter;
 			_battleScenario = battleScenario;
+			_battleView = battleView;
 			
 			_init();
 		}
