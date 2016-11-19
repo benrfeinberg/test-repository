@@ -14,14 +14,23 @@ package battle.move.logic
 		
 		public function pickMove(allies:Vector.<Creature>, enemies:Vector.<Creature>, moveList:Vector.<Move>):MoveAction {
 			var randomMove:Move = moveList[Math.floor(Math.random()*moveList.length)];
-			var target:Creature;
+			var targets:Vector.<Creature>;
 			
-			if(randomMove.type === MoveType.MOVE_TYPE_DAMAGE)
-				target = enemies[Math.floor(Math.random()*enemies.length)];
-			else
-				target = allies[Math.floor(Math.random()*allies.length)];
+			if(randomMove.targetAll) {
+				if(randomMove.type === MoveType.MOVE_TYPE_DAMAGE)
+					targets = enemies;
+				else
+					targets = allies;
+			} else {
+				targets = new Vector.<Creature>();
 				
-			return null;
+				if(randomMove.type === MoveType.MOVE_TYPE_DAMAGE)
+					targets.push(enemies[Math.floor(Math.random()*enemies.length)]);
+				else
+					targets.push(allies[Math.floor(Math.random()*allies.length)]);
+			}
+				
+			return new MoveAction(randomMove, targets);
 		}
 	}
 }

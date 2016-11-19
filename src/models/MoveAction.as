@@ -7,7 +7,7 @@ package models
 		private var _pendingText:String;
 		private var _executionText:String;
 		
-		public function MoveAction(move:Move, targets:Vector.<Creature>, pendingText:String, executionText:String)
+		public function MoveAction(move:Move, targets:Vector.<Creature>, pendingText:String = null, executionText:String = null)
 		{
 			_move = move;
 			_targets = targets;
