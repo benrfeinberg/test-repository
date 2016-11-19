@@ -1,5 +1,8 @@
 package models
 {
+	import battle.move.logic.MoveLogicCalculationRandom;
+	import battle.move.logic.IMoveLogicCalculation;
+
 	public class ModelFactory
 	{	
 		import data.BattleScenarios;
@@ -41,6 +44,7 @@ package models
 		public static function generateEnemy(data:Object):Enemy {
 			var gold:int = data['gold'] || 0;
 			var fame:int = data['fame'] || 0;
+			var moveLogicCalculation:IMoveLogicCalculation = generateMoveLogicCalculation(data['moveLogic'] || "");
 			
 			var dropsData:Array = data['drops'] as Array;
 			var drops:Vector.<IItem> = null;
@@ -52,15 +56,23 @@ package models
 				}
 			}
 			
-			return new Enemy(data['name'], data['maxHp'], gold, fame, drops);
+			return new Enemy(data['name'], data['maxHp'], data['speed'], moveLogicCalculation, gold, fame, drops);
 		}
 		
 		public static function generateHero(data:Object):Hero {
-			return new Hero(data['name'], data['maxHp']);
+			var moveLogicCalculation:IMoveLogicCalculation = generateMoveLogicCalculation(data['moveLogic'] || "");
+			return new Hero(data['name'], data['maxHp'], data['speed'], moveLogicCalculation);
 		}
 		
 		public static function generateItem(data:Object):IItem {
 			return null;
+		}
+		
+		public static function generateMoveLogicCalculation(id:String):IMoveLogicCalculation {
+			switch(id) {
+				default:
+					return new MoveLogicCalculationRandom();
+			}
 		}
 		
 		public static function generateSupporter(data:Object):Supporter {

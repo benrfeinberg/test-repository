@@ -14,6 +14,10 @@ package models
 			_moveList = moveList;
 		}
 		
+		public function update():void {
+			
+		}
+		
 		public function get maxMp():int { return _maxMp; }
 		public function get mp():int { return _mp; }
 		public function get moveList():Vector.<Move> { return _moveList; }

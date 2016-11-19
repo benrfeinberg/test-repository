@@ -1,5 +1,7 @@
 package models
 {
+	import battle.move.logic.IMoveLogicCalculation;
+	
 	import utils.MathUtils;
 
 	public class Hero extends Creature
@@ -9,9 +11,9 @@ package models
 		private var _maxTime:int;
 		private var _time:int;
 		
-		public function Hero(name:String, maxHp:int)
+		public function Hero(name:String, maxHp:int, speed:int, moveLogicCalculation:IMoveLogicCalculation)
 		{
-			super(name, maxHp);
+			super(name, maxHp, speed, moveLogicCalculation);
 			_maxHappiness = 100;
 			_maxTime = 1000;
 		}

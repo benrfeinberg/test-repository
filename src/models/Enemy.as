@@ -1,6 +1,6 @@
 package models
 {
-	import utils.MathUtils;
+	import battle.move.logic.IMoveLogicCalculation;
 
 	public class Enemy extends Creature
 	{
@@ -8,9 +8,9 @@ package models
 		private var _fame:int;
 		private var _drops:Vector.<IItem>;
 		
-		public function Enemy(name:String, maxHp:int, gold:int, fame:int, drops:Vector.<IItem>)
+		public function Enemy(name:String, maxHp:int, speed:int, moveLogicCalculation:IMoveLogicCalculation, gold:int, fame:int, drops:Vector.<IItem>)
 		{
-			super(name, maxHp);
+			super(name, maxHp, speed, moveLogicCalculation);
 			_gold = gold;
 			_fame = fame;
 			_drops = drops;

@@ -2,15 +2,25 @@ package battle.move.logic
 {
 	import models.Creature;
 	import models.Move;
+	
+	import utils.StatUtils;
 
 	public class MoveLogicManager
 	{
-		private var _targets:Vector.<Creature>;
+		private var _self:Creature;
+		private var _enemies:Vector.<Creature>;
 		private var _allies:Vector.<Creature>;
 		private var _pendingMove:Move;
 		
-		public function MoveLogicManager()
+		private var _wait:Number;
+		private var _waitStep:Number;
+		
+		public function MoveLogicManager(self:Creature)
 		{
+			_self = self;
+			
+			_wait = 0;
+			_waitStep = StatUtils.calculateSpeedStep(self.speed);
 		}
 		
 		public function determineNextMove():void {
@@ -21,8 +31,8 @@ package battle.move.logic
 			
 		}
 		
-		public function set targets(targets:Vector.<Creature>):void {
-			_targets = targets;
+		public function set enemies(enemies:Vector.<Creature>):void {
+			_enemies = enemies;
 		}
 		
 		public function set allies(allies:Vector.<Creature>):void {

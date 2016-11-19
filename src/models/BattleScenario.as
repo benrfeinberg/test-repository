@@ -23,13 +23,16 @@ package models
 			return _heroes;
 		}
 		
-		public function getEnemyGroup():Vector.<Enemy> {
+		public function getCurrentEnemyGroup():Vector.<Enemy> {
 			return _enemies[_currentGroup];
 		}
 		
-		public function advanceGroup():void {
-			if (!isLastGroup)
+		public function advanceGroup():Boolean {
+			if (!isLastGroup) {
 				_currentGroup++;
+				return false;
+			}
+			return true;
 		}
 		
 		public function get currentGroup():int {
