@@ -8,6 +8,7 @@ package view
 	
 	import models.Enemy;
 	import models.Hero;
+	import models.MoveAction;
 	import models.Supporter;
 	
 	import supportRPG.assets.battle.Battle_mc;
@@ -30,6 +31,11 @@ package view
 			addEventListener(Event.ADDED_TO_STAGE, _resize, false, 0, true);
 			addEventListener(Event.ENTER_FRAME, _updateScene, false, 0, true);
 			addChild(_assets);
+		}
+		
+		public function startAction(moveAction:MoveAction, onExecute:Function, onComplete:Function):void {
+			onExecute();
+			onComplete();
 		}
 		
 		public function addEnemy(enemy:Enemy):void {

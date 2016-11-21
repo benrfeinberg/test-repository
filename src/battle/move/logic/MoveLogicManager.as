@@ -24,14 +24,25 @@ package battle.move.logic
 			_waitStep = StatUtils.calculateSpeedStep(creature.speed);
 		}
 		
-		public function update():void {
+		public function update():MoveAction {
 			if(!_pendingMove) {
 				_determineNextMoveAction();
+				_wait = 0;
+			} else {
+				_wait += _waitStep;
+				var moveWait:int = _pendingMove.move.time;
+				if(_wait >= moveWait) {
+					_pendingMove.executionValue = _wait - moveWait;
+					return _pendingMove;
+				}
 			}
+			return null;
 		}
 		
-		public function doesNextMoveTrigger():void {
-			
+		public function executeMove():MoveAction {
+			var moveAction:MoveAction = _pendingMove;
+			_pendingMove = null;
+			return moveAction;
 		}
 		
 		public function set enemies(enemies:Vector.<Creature>):void {
@@ -43,7 +54,7 @@ package battle.move.logic
 		}
 		
 		private function _determineNextMoveAction():void {
-			//_pendingMove
+			_pendingMove = _creature.moveLogicCalculation.pickMove(_creature, _allies, _enemies, _creature.moveList);
 		}
 	}
 }

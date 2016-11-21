@@ -2,6 +2,7 @@ package view
 {
 	import models.Enemy;
 	import models.Hero;
+	import models.MoveAction;
 	import models.Supporter;
 
 	public interface IBattleView
@@ -19,5 +20,7 @@ package view
 		function removeAllHeroes():void;
 		
 		function addSupporter(supporter:Supporter):void;
+		
+		function startAction(moveAction:MoveAction, onExecute:Function, onComplete:Function):void;
 	}
 }

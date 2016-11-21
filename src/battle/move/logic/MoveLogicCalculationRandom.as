@@ -12,7 +12,7 @@ package battle.move.logic
 		{
 		}
 		
-		public function pickMove(allies:Vector.<Creature>, enemies:Vector.<Creature>, moveList:Vector.<Move>):MoveAction {
+		public function pickMove(executor:Creature, allies:Vector.<Creature>, enemies:Vector.<Creature>, moveList:Vector.<Move>):MoveAction {
 			var randomMove:Move = moveList[Math.floor(Math.random()*moveList.length)];
 			var targets:Vector.<Creature>;
 			
@@ -30,7 +30,7 @@ package battle.move.logic
 					targets.push(allies[Math.floor(Math.random()*allies.length)]);
 			}
 				
-			return new MoveAction(randomMove, targets);
+			return new MoveAction(executor, randomMove, targets);
 		}
 	}
 }

@@ -6,6 +6,6 @@ package battle.move.logic
 
 	public interface IMoveLogicCalculation
 	{
-		function pickMove(allies:Vector.<Creature>, enemies:Vector.<Creature>, moveList:Vector.<Move>):MoveAction;
+		function pickMove(executor:Creature, allies:Vector.<Creature>, enemies:Vector.<Creature>, moveList:Vector.<Move>):MoveAction;
 	}
 }

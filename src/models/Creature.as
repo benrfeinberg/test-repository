@@ -31,8 +31,8 @@ package models
 			_moveManager = new MoveLogicManager(this);
 		}
 		
-		public function update():void {
-			
+		public function update():MoveAction {
+			return _moveManager.update();
 		}
 		
 		public function get name():String { return _name; }

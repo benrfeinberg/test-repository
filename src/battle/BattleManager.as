@@ -4,6 +4,7 @@ package battle
 	import models.Creature;
 	import models.Enemy;
 	import models.Hero;
+	import models.MoveAction;
 	import models.Supporter;
 	
 	import view.IBattleView;
@@ -16,6 +17,10 @@ package battle
 		
 		private var _battleScenario:BattleScenario;
 		private var _battleView:IBattleView;
+		
+		private var _actionsToExecute:Vector.<MoveAction>;
+		private var _currentExecutingAction:MoveAction;
+		private var _executingActions:Boolean;
 		
 		public function BattleManager(supporter:Supporter, battleScenario:BattleScenario, battleView:IBattleView)
 		{
@@ -30,18 +35,56 @@ package battle
 			_initializeSupporter();
 			_initializeHeroes();
 			_initializeMonsters();
+			
+			_actionsToExecute = new Vector.<MoveAction>();
+			_executingActions = false;
 		}
 		
 		public function update():void {
-			_supporter.update();
-			
-			for(var hero:Hero in _heroes) {
-				hero.update();
+			if(_executingActions) {
+				
+			} else {
+				var actionsToExecute:Vector.<MoveAction> = new Vector.<MoveAction>();
+				var creatures:Vector.<Creature> = _getAllCreatures();
+				_supporter.update();
+				
+				for(var creature:Creature in creatures) {
+					var moveAction:MoveAction = creature.update();
+					if(moveAction)
+						actionsToExecute.push(moveAction);
+				}
+				
+				if(actionsToExecute.length) {
+					actionsToExecute.sort(_actionsToExecuteSort);
+					_actionsToExecute = actionsToExecute;
+					_startNextAction();
+				}
 			}
-			
-			for(var enemy:Enemy in _currentEnemyGroup) {
-				enemy.update();
+		}
+		
+		private function _startNextAction():void {
+			if(_actionsToExecute.length) {
+				_currentExecutingAction = _actionsToExecute.shift();
+				_executingActions = true;
+			} else {
+				_executingActions = false;
 			}
+		}
+		
+		private function _executeCurrentAction():void {
+			_currentExecutingAction.executor.moveManager.executeMove();
+		}
+		
+		private function _finishCurrentAction():void {
+			_currentExecutingAction.execute();
+			_currentExecutingAction = null;
+			
+			if(!_checkBattleComplete())
+				_startNextAction();
+		}
+		
+		private function _checkBattleComplete():Boolean {
+			return false;
 		}
 		
 		private function _initializeSupporter():void {
@@ -84,6 +127,16 @@ package battle
 		
 		private function _battleLost():void {
 			
+		}
+		
+		private function _actionsToExecuteSort(a:MoveAction, b:MoveAction):int {
+			return a.executionValue - b.executionValue;
+		}
+		
+		private function _getAllCreatures():Vector.<Creature> {
+			var creatures:Vector.<Creature>;
+			creatures = creatures.concat(creatures, _heroes, _currentEnemyGroup);
+			return creatures;
 		}
 		
 		private function _setAllies(targetGroup:Vector.<Creature>):void {
