@@ -39,6 +39,7 @@ package models
 		public function get maxHp():int { return _maxHp; }
 		public function get hp():int { return _hp; }
 		public function get speed():int { return _speed; }
+		public function get moveList():Vector.<Move> { return _moveList }
 		public function get moveManager():MoveLogicManager { return _moveManager; }
 		public function get moveLogicCalculation():IMoveLogicCalculation { return _moveLogicCalculation; }
 		

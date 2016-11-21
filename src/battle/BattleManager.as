@@ -32,6 +32,18 @@ package battle
 			_initializeMonsters();
 		}
 		
+		public function update():void {
+			_supporter.update();
+			
+			for(var hero:Hero in _heroes) {
+				hero.update();
+			}
+			
+			for(var enemy:Enemy in _currentEnemyGroup) {
+				enemy.update();
+			}
+		}
+		
 		private function _initializeSupporter():void {
 			_battleView.addSupporter(_supporter);
 		}
@@ -72,14 +84,6 @@ package battle
 		
 		private function _battleLost():void {
 			
-		}
-		
-		private function _update():void {
-			_supporter.update();
-			
-			for(var hero:Hero in _heroes) {
-				hero.update();
-			}
 		}
 		
 		private function _setAllies(targetGroup:Vector.<Creature>):void {
