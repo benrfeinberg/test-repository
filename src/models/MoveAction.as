@@ -18,8 +18,8 @@ package models
 			_executionText = executionText;
 		}
 		
-		public function execute():void {
-			_executor.moveManager.executeMove();
+		public function execute():MoveResults {
+			return _executor.moveManager.executeMove();
 		}
 		
 		public function get executor():Creature { return _executor; }

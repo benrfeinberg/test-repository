@@ -5,6 +5,7 @@ package battle
 	import models.Enemy;
 	import models.Hero;
 	import models.MoveAction;
+	import models.MoveResults;
 	import models.Supporter;
 	
 	import view.IBattleView;
@@ -65,6 +66,7 @@ package battle
 		private function _startNextAction():void {
 			if(_actionsToExecute.length) {
 				_currentExecutingAction = _actionsToExecute.shift();
+				_battleView.startAction(_currentExecutingAction, _executeCurrentAction, _finishCurrentAction);
 				_executingActions = true;
 			} else {
 				_executingActions = false;
@@ -72,11 +74,13 @@ package battle
 		}
 		
 		private function _executeCurrentAction():void {
-			_currentExecutingAction.executor.moveManager.executeMove();
+			var moveResults:MoveResults = _currentExecutingAction.execute();
+			for(var i:int = 0, len:int = _heroes.length; i < len; i++) {
+				var hero:Hero = _heroes[i];
+			}
 		}
 		
 		private function _finishCurrentAction():void {
-			_currentExecutingAction.execute();
 			_currentExecutingAction = null;
 			
 			if(!_checkBattleComplete())

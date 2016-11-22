@@ -24,7 +24,7 @@ package
 		
 		public function SupportRPG()
 		{
-			_supporter = ModelFactory.generateSupporter({mapMp:25});
+			_supporter = ModelFactory.generateSupporter({maxMp:25});
 			_battleScenario = ModelFactory.generateBattleScenarioByLevel(1);
 			_battleView = new VectorBattleView();
 			_battleManager = new BattleManager(_supporter, _battleScenario, _battleView);
