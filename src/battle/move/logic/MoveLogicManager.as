@@ -1,8 +1,12 @@
 package battle.move.logic
 {
+	import battle.move.MoveType;
+	
 	import models.Creature;
 	import models.Move;
 	import models.MoveAction;
+	import models.MoveResult;
+	import models.MoveResults;
 	
 	import utils.StatUtils;
 
@@ -39,10 +43,17 @@ package battle.move.logic
 			return null;
 		}
 		
-		public function executeMove():MoveAction {
+		public function executeMove():MoveResults {
+			var moveResults:MoveResults = new MoveResults();
 			var moveAction:MoveAction = _pendingMove;
 			_pendingMove = null;
-			return moveAction;
+			
+			for(var i:int = 0, len:int = moveAction.targets.length; i < len; i++) {
+				var target:Creature = moveAction.targets[i];
+				moveResults.addResults(_applyMoveEffects(target, moveAction.move));
+			}
+			
+			return moveResults;
 		}
 		
 		public function set enemies(enemies:Vector.<Creature>):void {
@@ -55,6 +66,20 @@ package battle.move.logic
 		
 		private function _determineNextMoveAction():void {
 			_pendingMove = _creature.moveLogicCalculation.pickMove(_creature, _allies, _enemies, _creature.moveList);
+		}
+		
+		private function _applyMoveEffects(target:Creature, move:Move):Vector.<MoveResult> {
+			var moveResults:Vector.<MoveResult> = new Vector.<MoveResult>();
+			
+			switch(move.type) {
+				case MoveType.MOVE_TYPE_DAMAGE:
+					default:
+					var damage:int = StatUtils.calculateDamage(_creature, target, move);
+					target.hp -= damage;
+					break;
+			}
+			
+			return moveResults;
 		}
 	}
 }
